@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Valentín</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #yes {
+            background-color: #ff4d4d;
+            color: white;
+        }
+
+        #no {
+            background-color: #ccc;
+            color: black;
+        }
+
+        .message {
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+
+        .image {
+            margin-top: 20px;
+            width: 300px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="question">¿Quieres ser mi San Valentín?</h1>
+    <div class="buttons" id="buttons">
+        <button id="yes" onclick="accept()">Sí</button>
+        <button id="no" onclick="shrinkNo()">No</button>
+    </div>
+
+    <div id="message" class="message"></div>
+    <img id="image" class="image" style="display: none;" src="https://sweezy-cursors.com/wp-content/uploads/cursor/milk-amp-mocha-bear-love/milk-mocha-bear-love-custom-cursor.png" alt="Peluches abrazándose" />
+
+    <script>
+        let noButton = document.getElementById("no");
+        let yesButton = document.getElementById("yes");
+        let messageDiv = document.getElementById("message");
+        let image = document.getElementById("image");
+        let buttonsDiv = document.getElementById("buttons");
+        let question = document.getElementById("question");
+        let size = 1.5;
+        let clickCount = 0;
+
+        function shrinkNo() {
+            clickCount++;
+
+            if (clickCount === 1) {
+                noButton.innerText = "¿Segura que no quieres?";
+            }
+
+            if (size > 0.1) {
+                size -= 0.2;
+                noButton.style.fontSize = size + "em";
+                noButton.style.padding = (size * 10) + "px " + (size * 20) + "px";
+            }
+
+            if (size <= 0.1) {
+                noButton.style.display = "none";
+            }
+        }
+
+        function accept() {
+            // Oculta el encabezado, los botones y muestra el mensaje y la imagen
+            question.style.display = "none";
+            buttonsDiv.style.display = "none";
+            messageDiv.innerHTML = "¡Sabía que dirías que sí, mi Ker hermosa! ❤️";
+            image.style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
