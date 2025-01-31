@@ -26,7 +26,9 @@
 
         .buttons {
             margin-top: 20px;
-            position: relative; /* Cambié de absolute a relative */
+            position: relative;
+            display: flex;
+            justify-content: space-evenly; /* Para poner los botones uno al lado del otro */
         }
 
         button {
@@ -36,7 +38,7 @@
             border: none;
             border-radius: 5px;
             transition: all 0.3s ease;
-            position: relative; /* Cambié de absolute a relative */
+            position: relative;
         }
 
         #yes {
@@ -64,7 +66,7 @@
 
     <div class="container">
         <!-- Imagen inicial -->
-        <img src="https://i.imgflip.com/8h26xs.png" alt="Peluches abrazados">
+        <img src="https://i.imgflip.com/8h26xs.png" alt="Peluches abrazados" id="initialImage">
         
         <h1>¿Quieres ser mi San Valentín?</h1>
         <div class="buttons">
@@ -116,10 +118,11 @@
             // Cambiar el texto y ocultar las opciones
             document.querySelector("h1").style.display = "none";
             document.querySelector(".buttons").style.display = "none";
+            document.getElementById("initialImage").style.display = "none";  // Ocultar la imagen inicial
             
             let messageDiv = document.createElement('div');
             messageDiv.classList.add('message');
-            messageDiv.innerHTML = `<p>¡Sabía que dirías que sí, mi Ker hermosa! ❤️</p><img src="https://sweezy-cursors.com/wp-content/uploads/cursor/milk-amp-mocha-bear-love/milk-mocha-bear-love-custom-cursor.png" alt="Peluches abrazados">`;
+            messageDiv.innerHTML = `<p>¡Sabía que dirías que sí, mi Ker hermosa! ❤️</p>`;
             document.body.appendChild(messageDiv);
         }
     </script>
