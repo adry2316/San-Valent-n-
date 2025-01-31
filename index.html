@@ -15,6 +15,7 @@
             background-color: #f9f9f9;
             text-align: center;
             position: relative;
+            overflow: hidden;  /* Para que los botones no se salgan de la pantalla */
         }
 
         .container {
@@ -22,6 +23,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            max-width: 100%; /* Aseguramos que no se salga del tamaño de la pantalla */
+            width: 100%;
         }
 
         .buttons {
@@ -29,6 +32,7 @@
             position: relative;
             display: flex;
             justify-content: space-evenly; /* Para poner los botones uno al lado del otro */
+            width: 100%; /* Hacer los botones más responsivos */
         }
 
         button {
@@ -54,6 +58,7 @@
         img {
             width: 200px;
             margin-bottom: 30px;
+            max-width: 100%;
         }
 
         .message {
@@ -83,8 +88,11 @@
 
         // Función para hacer que el botón "No" huya
         function moveButton() {
-            let randomX = Math.random() * window.innerWidth - noButton.offsetWidth;
-            let randomY = Math.random() * window.innerHeight - noButton.offsetHeight;
+            // Limitar el movimiento en un rango menor
+            let maxX = window.innerWidth - noButton.offsetWidth - 50; // 50px de margen
+            let maxY = window.innerHeight - noButton.offsetHeight - 50; // 50px de margen
+            let randomX = Math.random() * maxX;
+            let randomY = Math.random() * maxY;
 
             noButton.style.left = `${randomX}px`;
             noButton.style.top = `${randomY}px`;
@@ -98,7 +106,7 @@
                 noButton.innerText = "¿Segura que no quieres?";
             }
 
-            // Mover el botón "No" a un lugar aleatorio
+            // Mover el botón "No" a un lugar aleatorio pero dentro de un rango
             moveButton();
 
             // Hacer que el botón se haga más pequeño poco a poco
