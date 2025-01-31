@@ -131,9 +131,17 @@
             document.querySelector(".buttons").style.display = "none";
             document.getElementById("initialImage").style.display = "none";  // Ocultar la imagen inicial
             
-            // Mostrar el mensaje final con la imagen
+            // Mostrar el mensaje final con el GIF
             let messageDiv = document.createElement('div');
             messageDiv.classList.add('message');
             messageDiv.innerHTML = `
                 <p>¡Sabía que dirías que sí, mi Ker hermosa! ❤️</p>
-                <img src="https://sweezy-cursors.com/wp-content/uploads/cursor/milk-am
+                <img src="https://i.pinimg.com/originals/e9/c4/2e/e9c42e162d7095d73968532fda857317.gif" alt="Peluches GIF">
+            `;
+            document.body.appendChild(messageDiv);
+            messageDiv.style.display = "block";  // Hacer visible el mensaje
+        }
+    </script>
+
+</body>
+</html>
