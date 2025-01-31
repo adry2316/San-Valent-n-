@@ -85,23 +85,8 @@
         let yesButton = document.getElementById("yes");
         let size = 1.5;
         let clickCount = 0;
-        let angle = 0;  // Para el movimiento circular
 
-        // Función para hacer que el botón "No" huya en círculos cerca del centro
-        function moveButton() {
-            const centerX = window.innerWidth / 2; // Centro de la pantalla
-            const centerY = window.innerHeight / 2; // Centro de la pantalla
-            const radius = 150; // Radio pequeño para que no se mueva mucho
-            angle += 0.1; // Incrementar el ángulo para hacer el movimiento circular
-
-            // Calcular la nueva posición del botón "No" en círculo
-            const x = centerX + radius * Math.cos(angle);
-            const y = centerY + radius * Math.sin(angle);
-
-            noButton.style.left = `${x - noButton.offsetWidth / 2}px`; // Ajustar para centrar el botón
-            noButton.style.top = `${y - noButton.offsetHeight / 2}px`; // Ajustar para centrar el botón
-        }
-
+        // Función para reducir el tamaño del botón "No" al hacer clic
         function shrinkNo() {
             clickCount++;
 
@@ -109,9 +94,6 @@
             if (clickCount === 1) {
                 noButton.innerText = "¿Segura que no quieres?";
             }
-
-            // Mover el botón "No" en círculos cercanos al centro
-            moveButton();
 
             // Hacer que el botón se haga más pequeño poco a poco
             if (size > 0.1) {
