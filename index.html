@@ -61,6 +61,21 @@
 
         .message {
             margin-top: 30px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5em;
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        .message img {
+            width: 100px;
+            margin-top: 10px;
         }
 
     </style>
@@ -112,10 +127,15 @@
             document.querySelector(".buttons").style.display = "none";
             document.getElementById("initialImage").style.display = "none";  // Ocultar la imagen inicial
             
+            // Mostrar el mensaje final con la imagen
             let messageDiv = document.createElement('div');
             messageDiv.classList.add('message');
-            messageDiv.innerHTML = `<p>¡Sabía que dirías que sí, mi Ker hermosa! ❤️</p>`;
+            messageDiv.innerHTML = `
+                <p>¡Sabía que dirías que sí, mi Ker hermosa! ❤️</p>
+                <img src="https://sweezy-cursors.com/wp-content/uploads/cursor/milk-amp-mocha-bear-love/milk-mocha-bear-love-custom-cursor.png" alt="Peluches">
+            `;
             document.body.appendChild(messageDiv);
+            messageDiv.style.display = "block";  // Hacer visible el mensaje
         }
     </script>
 
