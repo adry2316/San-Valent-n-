@@ -7,33 +7,44 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f9f9f9;
             text-align: center;
+            padding: 50px;
+            overflow: hidden;
+            background-color: #ffccd5;
             position: relative;
-            width: 100%;
-            padding: 0 10%;  /* Regresé el padding a 10% para la primera parte */
         }
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        /* Contenedor de corazones flotantes */
+        .heart-container {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 24px;
+            animation: floatUp 5s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2);
+                opacity: 0;
+            }
         }
 
         .buttons {
             margin-top: 20px;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            width: 100%;
         }
 
         button {
@@ -42,7 +53,6 @@
             cursor: pointer;
             border: none;
             border-radius: 5px;
-            transition: all 0.3s ease;
         }
 
         #yes {
@@ -55,92 +65,91 @@
             color: black;
         }
 
-        img {
-            width: 200px;
-            margin-top: 30px;
-            max-width: 100%;
-        }
-
-        .message {
-            margin-top: 20px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.5em;
-            background-color: #fff;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        #finalMessage {
             display: none;
-            text-align: center;
-            width: 90%; /* Este sigue igual para ocupar más espacio horizontal */
+            font-size: 1.5em;
+            color: #d6336c;
+            font-weight: bold;
         }
 
-        .message img {
-            width: 400px;  /* Agrandé la imagen al doble */
-            margin-top: 15px;
+        #finalImage {
+            display: none;
+            width: 250px;
+            height: auto;
+            margin-top: 20px;
         }
-
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Imagen inicial -->
-        <img src="https://i.imgflip.com/8h26xs.png" alt="Peluches abrazados" id="initialImage">
-        
-        <h1>¿Quieres ser mi San Valentín?</h1>
-        <div class="buttons">
-            <button id="yes" onclick="accept()">Sí</button>
-            <button id="no" onclick="shrinkNo()">No</button>
-        </div>
+    <h1 id="question">¿Quieres ser mi San Valentín Porotín?</h1>
+    <div class="buttons">
+        <button id="yes" onclick="accept()">Sí</button>
+        <button id="no" onclick="shrinkNo()">No</button>
     </div>
+
+    <p id="finalMessage"></p>
+    <img id="finalImage" src="https://i.pinimg.com/originals/e9/c4/2e/e9c42e162d7095d73968532fda857317.gif" alt="Peluches abrazándose">
+
+    <div class="heart-container"></div>
 
     <script>
         let noButton = document.getElementById("no");
         let yesButton = document.getElementById("yes");
+        let questionText = document.getElementById("question");
+        let finalMessage = document.getElementById("finalMessage");
+        let finalImage = document.getElementById("finalImage");
         let size = 1.5;
         let clickCount = 0;
 
-        // Función para reducir el tamaño del botón "No" al hacer clic
         function shrinkNo() {
             clickCount++;
 
-            // Cambiar el texto después del primer clic
             if (clickCount === 1) {
                 noButton.innerText = "¿Segura que no quieres?";
             }
 
-            // Hacer que el botón se haga más pequeño poco a poco
             if (size > 0.1) {
                 size -= 0.1;
                 noButton.style.fontSize = size + "em";
                 noButton.style.padding = (size * 10) + "px " + (size * 20) + "px";
             }
 
-            // Después de varios clics, ocultar el botón
             if (size <= 0.1) {
                 noButton.style.display = "none";
             }
         }
 
         function accept() {
-            // Cambiar el texto y ocultar las opciones
-            document.querySelector("h1").style.display = "none";
-            document.querySelector(".buttons").style.display = "none";
-            document.getElementById("initialImage").style.display = "none";  // Ocultar la imagen inicial
-            
-            // Mostrar el mensaje final con el GIF
-            let messageDiv = document.createElement('div');
-            messageDiv.classList.add('message');
-            messageDiv.innerHTML = `
-                <p>Sabía que dirías que sí mi Ker, te amo mucho mi bebé preciosa 💖<br>Ñam</p>
-                <img src="https://i.pinimg.com/originals/e9/c4/2e/e9c42e162d7095d73968532fda857317.gif" alt="Peluches GIF">
-            `;
-            document.body.appendChild(messageDiv);
-            messageDiv.style.display = "block";  // Hacer visible el mensaje
+            questionText.style.display = "none";
+            yesButton.style.display = "none";
+            noButton.style.display = "none";
+
+            finalMessage.innerText = "Sabía que dirías que sí mi Ker, te amo mucho mi bebé preciosa 💖\nÑam";
+            finalMessage.style.display = "block";
+            finalImage.style.display = "block";
         }
+
+        // Función para generar corazones flotantes
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+
+            // Posición aleatoria
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+
+            document.querySelector(".heart-container").appendChild(heart);
+
+            // Eliminar el corazón después de que desaparezca
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        // Crear corazones cada 500ms
+        setInterval(createHeart, 500);
     </script>
 
 </body>
