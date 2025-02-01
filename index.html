@@ -12,9 +12,14 @@
             overflow: hidden;
             background-color: #ffccd5;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
-        /* Contenedor de corazones flotantes */
+        /* Fondo animado con corazones */
         .heart-container {
             position: fixed;
             top: 0;
@@ -41,6 +46,18 @@
                 transform: translateY(-10vh) scale(1.2);
                 opacity: 0;
             }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        img {
+            width: 250px;
+            height: auto;
+            margin-bottom: 20px;
         }
 
         .buttons {
@@ -70,11 +87,12 @@
             font-size: 1.5em;
             color: #d6336c;
             font-weight: bold;
+            text-align: center;
         }
 
         #finalImage {
             display: none;
-            width: 250px;
+            width: 300px;
             height: auto;
             margin-top: 20px;
         }
@@ -82,14 +100,17 @@
 </head>
 <body>
 
-    <h1 id="question">¿Quieres ser mi San Valentín Porotín?</h1>
-    <div class="buttons">
-        <button id="yes" onclick="accept()">Sí</button>
-        <button id="no" onclick="shrinkNo()">No</button>
-    </div>
+    <div class="container">
+        <img id="initialImage" src="https://i.imgflip.com/8h26xs.png" alt="Imagen inicial">
+        <h1 id="question">¿Quieres ser mi San Valentín?</h1>
+        <div class="buttons">
+            <button id="yes" onclick="accept()">Sí</button>
+            <button id="no" onclick="shrinkNo()">No</button>
+        </div>
 
-    <p id="finalMessage"></p>
-    <img id="finalImage" src="https://i.pinimg.com/originals/e9/c4/2e/e9c42e162d7095d73968532fda857317.gif" alt="Peluches abrazándose">
+        <p id="finalMessage"></p>
+        <img id="finalImage" src="https://i.pinimg.com/originals/e9/c4/2e/e9c42e162d7095d73968532fda857317.gif" alt="Peluches abrazándose">
+    </div>
 
     <div class="heart-container"></div>
 
@@ -99,6 +120,7 @@
         let questionText = document.getElementById("question");
         let finalMessage = document.getElementById("finalMessage");
         let finalImage = document.getElementById("finalImage");
+        let initialImage = document.getElementById("initialImage");
         let size = 1.5;
         let clickCount = 0;
 
@@ -124,6 +146,7 @@
             questionText.style.display = "none";
             yesButton.style.display = "none";
             noButton.style.display = "none";
+            initialImage.style.display = "none";
 
             finalMessage.innerText = "Sabía que dirías que sí mi Ker, te amo mucho mi bebé preciosa 💖\nÑam";
             finalMessage.style.display = "block";
